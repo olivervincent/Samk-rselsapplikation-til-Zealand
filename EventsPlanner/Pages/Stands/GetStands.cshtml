@@ -1,0 +1,62 @@
+﻿@page
+@model EventsPlanner.GetStandsModel
+@{
+ViewData["Title"] = "GetStands";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center text-primary mb-4">List of Stands</h2>
+    <form method="get" class="mb-4">
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <label asp-for="Stand.Price">By Price</label>
+                <input type="text" class="form-control" asp-for="Stand.Price" />
+            </div>
+            <div class="form-group col-md-3">
+                <label asp-for="Stand.Types">By Type</label>
+                <input type="text" class="form-control" asp-for="Stand.Types" />
+            </div>
+            <div class="col-auto align-self-end">
+                <button type="submit" class="btn btn-primary">Filter</button>
+                <a asp-page="/Stands/GetStands" class="btn btn-secondary">Back to Full List</a>
+            </div>
+        </div>
+    </form>
+
+    @if (Model.Stands != null)
+    {
+    @if (Model.Count != 0)
+    {
+    <p class="font-weight-bold">The number of rooms is: @Model.Count</p>
+    }
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+        <tr>
+            <th>Stand No</th>
+            <th>Price</th>
+            <th>Type</th>
+            <th>Event No</th>
+            <th>Bookings</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Stands)
+        {
+        <tr>
+            <td>@item.StandNo</td>
+            <td>@item.Price</td>
+            <td>@item.Types</td>
+            <td>@item.EventNo</td>
+            <td>
+                <a asp-page="/Bookings/GetBookings" asp-page-handler="BookingsPerEventPerStand" asp-route-id1="@item.EventNo" asp-route-id2="@item.StandNo" class="btn btn-info btn-sm">View Bookings</a>
+            </td>
+        </tr>
+        }
+        </tbody>
+    </table>
+    }
+    else
+    {
+    <p>No rooms found.</p>
+    }
+</div>

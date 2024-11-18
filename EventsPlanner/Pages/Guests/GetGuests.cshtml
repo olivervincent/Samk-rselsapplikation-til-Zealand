@@ -1,0 +1,47 @@
+﻿@page
+@model EventsPlanner.GetGuestsModel
+@{
+ViewData["Title"] = "GetGuests";
+}
+<div class="container mt-4">
+    <h2 class="text-center text-primary mb-4">List of Guests</h2>
+    <form class="form-inline mb-4">
+        <div class="form-group mr-2">
+            <label for="FilterCriteria" class="sr-only">Search</label>
+            <input type="text" class="form-control" id="FilterCriteria" placeholder="Search" asp-for="FilterCriteria" />
+        </div>
+        <button type="submit" class="btn btn-primary mr-2">Filter</button>
+        <a asp-page="/Guests/GetGuests" class="btn btn-secondary">Back to Full List</a>
+    </form>
+
+    @if (Model.Guests != null)
+    {
+    <table class="table table-sm table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th>Guest No</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Bookings</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Guests)
+        {
+        <tr>
+            <td>@item.GuestNo</td>
+            <td>@item.Name</td>
+            <td>@item.Address</td>
+            <td>
+                <a asp-page="/Bookings/GetBookings" asp-page-handler="GuestBookings" asp-route-id="@item.GuestNo" class="btn btn-info btn-sm">My Bookings</a>
+            </td>
+        </tr>
+        }
+        </tbody>
+    </table>
+    }
+    else
+    {
+    <p>No guests found.</p>
+    }
+</div>

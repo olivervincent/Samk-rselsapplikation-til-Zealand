@@ -1,0 +1,62 @@
+﻿@page
+@model EventsPlanner.GetBookingsModel
+@{
+ViewData["Title"] = "GetBookings";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center text-primary mb-4">List of Bookings</h2>
+    <form class="mb-4">
+        <div class="form-row align-items-end">
+            <div class="col-md-3">
+                <label asp-for="DateFrom">From</label>
+                <input type="date" class="form-control" asp-for="DateFrom" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="DateTo">To</label>
+                <input type="date" class="form-control" asp-for="DateTo" />
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Filter</button>
+                <a asp-page="/Bookings/GetBookings" class="btn btn-secondary">Back to Full List</a>
+            </div>
+        </div>
+    </form>
+
+    @if (Model.Bookings != null)
+    {
+    @if (Model.Count != 0)
+    {
+    <p class="font-weight-bold">The number of bookings is: @Model.Count</p>
+    }
+    <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Booking Id</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Event No</th>
+            <th>Stand No</th>
+            <th>Guest No</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Bookings)
+        {
+        <tr>
+            <td>@item.BookingId</td>
+            <td>@item.DateFrom.ToShortDateString()</td>
+            <td>@item.DateTo.ToShortDateString()</td>
+            <td>@item.EventNo</td>
+            <td>@item.StandNo</td>
+            <td>@item.GuestNo</td>
+        </tr>
+        }
+        </tbody>
+    </table>
+    }
+    else
+    {
+    <p>No bookings found.</p>
+    }
+</div>
