@@ -29,6 +29,7 @@ namespace EventsPlanner
             }
             else
                 Events = hService.GetEvents();
+            
         }
     }
 }

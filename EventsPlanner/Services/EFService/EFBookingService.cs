@@ -31,6 +31,22 @@ namespace EventsPlanner.Services.EFService
         {
             return context.Bookings.Where(b=>b.EventNo==hid && b.StandNo==rid);          
         }
+        public void CreateBooking(Booking booking)
+        {
+            using (var context = new EventdbContext.EventdbContext())
+            {
+                // Check if the GuestNo exists in the Guest table
+                var guestExists = context.Guests.Any(g => g.GuestNo == booking.GuestNo);
+                if (!guestExists)
+                {
+                    throw new ArgumentException($"The specified GuestNo does not exist. {booking.GuestNo}");
+                }
+
+                // Insert the booking into the database
+                context.Bookings.Add(booking);
+                context.SaveChanges();
+            }
+        }
     }
 }
 

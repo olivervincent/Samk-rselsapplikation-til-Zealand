@@ -37,6 +37,9 @@ ViewData["Title"] = "GetEvents";
             <td>
                 <a asp-page="/Stands/GetStands" asp-page-handler="EventStands" asp-route-id="@item.EventNo" class="btn btn-info btn-sm">View Stands</a>
             </td>
+            <td>
+                <a asp-page="/Bookings/CreateBooking" asp-route-id="@item.EventNo" class="btn btn-info btn-sm">Create Booking</a>
+            </td>
         </tr>
         }
         </tbody>

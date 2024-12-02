@@ -12,5 +12,6 @@ namespace EventsPlanner.Services.Interface
         public IEnumerable<Booking> FilterBookingsByDate(DateTime dateFrom, DateTime dateTo);
         public IEnumerable<Booking> GetBookingsPerGuest(int gid);
         public IEnumerable<Booking> GetBookingsPerEventPerStand(int hid, int rid);
+        public void CreateBooking(Booking booking);
     }
 }
