@@ -13,5 +13,7 @@ namespace EventsPlanner.Services.Interface
         public IEnumerable<Booking> GetBookingsPerGuest(int gid);
         public IEnumerable<Booking> GetBookingsPerEventPerStand(int hid, int rid);
         public void CreateBooking(Booking booking);
+        public void DeleteBooking(int bid);
+        public void UpdateBooking(Booking booking);
     }
 }
