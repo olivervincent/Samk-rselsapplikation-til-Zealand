@@ -1,0 +1,35 @@
+﻿@page
+@model EventsPlanner.Pages.Bookings.UpdateBookingsModel
+@{
+    ViewData["Title"] = "Update Bookings";
+}
+
+<div class="container mt-4">
+    <h2 class="text-center text-primary mb-4">Update Booking</h2>
+    <form method="post">
+        <input type="hidden" asp-for="Booking.BookingId" />
+        <div class="form-row">
+            <div class="col-md-3">
+                <label asp-for="Booking.DateFrom">From</label>
+                <input type="date" class="form-control" asp-for="Booking.DateFrom" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Booking.DateTo">To</label>
+                <input type="date" class="form-control" asp-for="Booking.DateTo" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Booking.EventNo">Event No</label>
+                <input type="text" class="form-control" asp-for="Booking.EventNo" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Booking.StandNo">Stand No</label>
+                <input type="text" class="form-control" asp-for="Booking.StandNo" />
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Booking.GuestNo">Guest No</label>
+                <input type="text" class="form-control" asp-for="Booking.GuestNo" />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-4">Update</button>
+        <a asp-page="/Bookings/GetBookings" class="btn btn-secondary mt-4">Back to List</a>
+    </form>

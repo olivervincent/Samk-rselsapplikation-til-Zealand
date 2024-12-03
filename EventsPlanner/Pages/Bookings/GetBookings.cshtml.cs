@@ -44,7 +44,23 @@ namespace EventsPlanner
         }
         public void OnGetBookingsPerEventPerStand(int id1, int id2)
         {
+
             Bookings = bService.GetBookingsPerEventPerStand(id1, id2);
+        }
+        public IActionResult OnPost(int bookingId)
+        {
+            bService.DeleteBooking(bookingId);
+
+            if (DateFrom.HasValue && DateTo.HasValue)
+            {
+                Bookings = bService.FilterBookingsByDate(DateFrom.Value, DateTo.Value);
+            }
+            else
+            {
+                Bookings = bService.GetBookings();
+            }
+
+            return RedirectToPage();
         }
     }
 }

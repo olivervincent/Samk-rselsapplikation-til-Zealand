@@ -38,6 +38,7 @@ ViewData["Title"] = "GetBookings";
             <th>Event No</th>
             <th>Stand No</th>
             <th>Guest No</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -50,6 +51,13 @@ ViewData["Title"] = "GetBookings";
             <td>@item.EventNo</td>
             <td>@item.StandNo</td>
             <td>@item.GuestNo</td>
+            <td>
+                <a asp-page="/Bookings/UpdateBookings" asp-route-id="@item.BookingId" class="btn btn-primary">Edit</a>
+                            <form method="post">
+                                <input type="hidden" asp-for="@item.BookingId" name="bookingId">
+                                <button type="submit" style="color: indianred; background: none; border: none; padding: 0; text-decoration: underline; cursor: pointer;">Delete</button>
+                            </form>
+            </td>
         </tr>
         }
         </tbody>

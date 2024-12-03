@@ -47,6 +47,34 @@ namespace EventsPlanner.Services.EFService
                 context.SaveChanges();
             }
         }
+        public void DeleteBooking(int bid)
+        {
+            using (var context = new EventdbContext.EventdbContext())
+            {
+                var booking = context.Bookings.Find(bid);
+                if (booking != null)
+                {
+                    context.Bookings.Remove(booking);
+                    context.SaveChanges();
+                }
+            }
+        }
+        public void UpdateBooking(Booking booking)
+        {
+            using (var context = new EventdbContext.EventdbContext())
+            {
+                var bookingToUpdate = context.Bookings.Find(booking.BookingId);
+                if (bookingToUpdate != null)
+                {
+                    bookingToUpdate.DateFrom = booking.DateFrom;
+                    bookingToUpdate.DateTo = booking.DateTo;
+                    bookingToUpdate.EventNo = booking.EventNo;
+                    bookingToUpdate.GuestNo = booking.GuestNo;
+                    bookingToUpdate.StandNo = booking.StandNo;
+                    context.SaveChanges();
+                }
+            }
+        }
     }
 }
 
