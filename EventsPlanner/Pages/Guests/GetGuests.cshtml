@@ -13,6 +13,7 @@ ViewData["Title"] = "GetGuests";
         <button type="submit" class="btn btn-primary mr-2">Filter</button>
         <a asp-page="/Guests/GetGuests" class="btn btn-secondary">Back to Full List</a>
     </form>
+    <a asp-page="/Guests/CreateGuests" class="btn btn-primary">Create</a>
 
     @if (Model.Guests != null)
     {

@@ -9,5 +9,12 @@ namespace EventsPlanner.Services.Interface
     public interface IGuestService
     {
         public IEnumerable<Guest> GetGuests();
+
+        public void CreateGuest(Guest guest);
+        public void UpdateGuest(Guest guest);
+        public void DeleteGuest(int id);
+
     }
+
+   
 }

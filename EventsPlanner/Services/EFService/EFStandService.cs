@@ -45,5 +45,24 @@ namespace EventsPlanner.Services.EFService
             else
                 return context.Stands.Where(r => r.Price <= price && r.Types==types);
         }
+        public void CreateStand(Stand stand)
+        {
+            stand.StandNo = context.Stands.Max(r => r.StandNo) + 1;
+            context.Stands.Add(stand);
+            context.SaveChanges();
+        }
+
+        public void UpdateStand(Stand stand)
+        {
+            context.Stands.Update(stand);
+            context.SaveChanges();
+        }
+
+        public void DeleteStand(int id1, int id2)
+        {
+            var stand = context.Stands.Find(id1, id2);
+            context.Stands.Remove(stand);
+            context.SaveChanges();
+        }
     }
 }

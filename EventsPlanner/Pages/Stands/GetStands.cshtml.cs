@@ -32,6 +32,12 @@ namespace EventsPlanner
             else
                 Stands = rService.GetStands();
         }
+
+        public void OnPost()
+        {
+
+        }
+
         public void OnGetEventStands(int  id)
         {
             Stands = rService.GetStandsPerEvent( id);          

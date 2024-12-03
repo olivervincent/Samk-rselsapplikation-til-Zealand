@@ -1,0 +1,38 @@
+﻿@page 
+@using EventsPlanner.Models
+@model EventsPlanner.CreateStandsModel
+@{
+    ViewData["Title"] = "CreateStands";
+}
+<html>
+<head>
+    <title>Create Stands</title>
+</head>
+<body>
+    <div>
+        <form method="post">
+            <div class="form-group">
+                <label for="EventNo">Events</label>
+                <select name="EventNo" id="EventNo" asp-for="EventNo">
+                    @foreach (var item in Model.Events)
+                    {
+                        <option value="@item.EventNo">@item.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Types">Types</label>
+                <input asp-for="@Model.Stand.Types" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Price">Price</label>
+                <input type="number" asp-for="@Model.Stand.Price" class="form-control" />
+            </div>
+            <div>
+                <input type="submit" value="Create" />
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>

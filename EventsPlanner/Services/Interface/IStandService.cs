@@ -12,5 +12,9 @@ namespace EventsPlanner.Services.Interface
         IEnumerable<Booking> GetBookingByStandByEvent(int id1, int id2);
         IEnumerable<Stand> GetStandsPerEvent(int id1);
        IEnumerable<Stand>  GetStands(double Price , string Types);
+
+        public void CreateStand(Stand stand);
+        public void UpdateStand(Stand stand);
+        public void DeleteStand(int id1, int id2);
     }
 }

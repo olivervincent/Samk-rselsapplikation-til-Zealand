@@ -1,0 +1,29 @@
+﻿@page 
+@using EventsPlanner.Models
+@model EventsPlanner.CreateGuestsModel
+@{
+    ViewData["Title"] = "CreateGuests";
+}
+<html>
+<head>
+    <title>Create Guests</title>
+</head>
+<body>
+    <div>
+        <form method="post">
+            <div class="form-group">
+                <label for="GuestName">Guest Name</label>
+                <input asp-for="@Model.Guest.Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="GuestAddress">Guest Address</label>
+                <input asp-for="@Model.Guest.Address" class="form-control" />
+            </div>
+            <div>
+                <input type="submit" value="Create" />
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>

@@ -19,5 +19,27 @@ namespace EventsPlanner.Services.EFService
         {
             return context.Guests;
         }
+
+        public void CreateGuest(Guest guest)
+        {
+            guest.GuestNo = context.Guests.Max(g => g.GuestNo) + 1;
+
+            context.Guests.Add(guest);
+            context.SaveChanges();
+
+        }
+
+        public void UpdateGuest(Guest guest)
+        {
+            context.Guests.Update(guest);
+            context.SaveChanges();
+        }
+
+        public void DeleteGuest(int id)
+        {
+            var guest = context.Guests.Find(id);
+            context.Guests.Remove(guest);
+            context.SaveChanges();
+        }
     }
 }
