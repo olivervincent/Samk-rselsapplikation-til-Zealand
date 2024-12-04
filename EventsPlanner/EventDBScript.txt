@@ -1,7 +1,4 @@
-﻿DROP TABLE [dbo].[Booking];
-DROP TABLE [dbo].[Guest];
-DROP TABLE [dbo].[Stand];
-DROP TABLE [dbo].[Event];
+﻿
 
 CREATE TABLE Event(
      Event_No  int  NOT NULL PRIMARY KEY,

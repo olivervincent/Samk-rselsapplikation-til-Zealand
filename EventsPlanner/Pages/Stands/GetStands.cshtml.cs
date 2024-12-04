@@ -33,14 +33,14 @@ namespace EventsPlanner
                 Stands = rService.GetStands();
         }
 
-        public void OnPost()
-        {
+        //public void OnPost()
+        //{
+          //  rService.DeleteStand();
+        //}
 
-        }
-
-        public void OnGetEventStands(int  id)
+        public void OnGetEventStands(int id)
         {
-            Stands = rService.GetStandsPerEvent( id);          
+            Stands = rService.GetStandsPerEvent(id);          
         }
     }
 }
