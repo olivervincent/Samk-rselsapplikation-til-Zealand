@@ -51,6 +51,7 @@ ViewData["Title"] = "GetStands";
                 <a asp-page="/Bookings/GetBookings" asp-page-handler="BookingsPerEventPerStand" asp-route-id1="@item.EventNo" asp-route-id2="@item.StandNo" class="btn btn-info btn-sm">View Bookings</a>
                             <form method="post">
                                 <input type="hidden" asp-for="@item.StandNo" name="standNo">
+                                <input type="hidden" asp-for="@item.EventNo" name="eventNo">
                                 <button type="submit" style="color: indianred; background: none; border: none; padding: 0; text-decoration: underline; cursor: pointer;">Delete</button>
                             </form>
             </td>

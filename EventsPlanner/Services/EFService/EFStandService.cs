@@ -58,9 +58,9 @@ namespace EventsPlanner.Services.EFService
             context.SaveChanges();
         }
 
-        public void DeleteStand(int id1, int id2)
+        public void DeleteStand(int id, int id2)
         {
-            var stand = context.Stands.Find(id1, id2);
+            var stand = context.Stands.Find(id, id2);
             context.Stands.Remove(stand);
             context.SaveChanges();
         }
