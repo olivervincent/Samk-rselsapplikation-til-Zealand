@@ -1,67 +1,47 @@
 ﻿@page
 @model EventsPlanner.GetStandsModel
 @{
-ViewData["Title"] = "GetStands";
+    ViewData["Title"] = "Stands";
 }
 
-<div class="container mt-4">
-    <h2 class="text-center text-primary mb-4">List of Stands</h2>
-    <form method="get" class="mb-4">
-        <div class="form-row">
-            <div class="form-group col-md-3">
-                <label asp-for="Stand.Price">By Price</label>
-                <input type="text" class="form-control" asp-for="Stand.Price" />
-            </div>
-            <div class="form-group col-md-3">
-                <label asp-for="Stand.Types">By Type</label>
-                <input type="text" class="form-control" asp-for="Stand.Types" />
-            </div>
-            <div class="col-auto align-self-end">
-                <button type="submit" class="btn btn-primary">Filter</button>
-                <a asp-page="/Stands/GetStands" class="btn btn-secondary">Back to Full List</a>
-            </div>
+<div class="text-center mt-5">
+    <h1 class="display-5 fw-bold">Stands</h1>
+    <p class="text-muted">Manage and view all stands for your events.</p>
+</div>
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Stand No</th>
+                        <th>Price</th>
+                        <th>Type</th>
+                        <th>Event No</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Stands)
+                    {
+                        <tr>
+                            <td>@item.StandNo</td>
+                            <td>@item.Price</td>
+                            <td>@item.Types</td>
+                            <td>@item.EventNo</td>
+                            <td>
+                                <a asp-page="/Bookings/GetBookings" asp-page-handler="BookingsPerEventPerStand" asp-route-id1="@item.EventNo" asp-route-id2="@item.StandNo" class="btn btn-primary btn-sm">View Bookings</a>
+                                <form method="post" class="d-inline">
+                                    <input type="hidden" asp-for="@item.StandNo" name="standNo">
+                                    <input type="hidden" asp-for="@item.EventNo" name="eventNo">
+                                    <button type="submit" class="btn btn-link text-danger p-0" style="text-decoration: underline;">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
-    </form>
-    <a asp-page="/Stands/CreateStands" class="btn btn-primary">Create</a>
-    @if (Model.Stands != null)
-    {
-    @if (Model.Count != 0)
-    {
-    <p class="font-weight-bold">The number of stands is: @Model.Count</p>
-    }
-    <table class="table table-bordered">
-        <thead class="thead-dark">
-        <tr>
-            <th>Stand No</th>
-            <th>Price</th>
-            <th>Type</th>
-            <th>Event No</th>
-            <th>Bookings</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in Model.Stands)
-        {
-        <tr>
-            <td>@item.StandNo</td>
-            <td>@item.Price</td>
-            <td>@item.Types</td>
-            <td>@item.EventNo</td>
-            <td>
-                <a asp-page="/Bookings/GetBookings" asp-page-handler="BookingsPerEventPerStand" asp-route-id1="@item.EventNo" asp-route-id2="@item.StandNo" class="btn btn-info btn-sm">View Bookings</a>
-                            <form method="post">
-                                <input type="hidden" asp-for="@item.StandNo" name="standNo">
-                                <input type="hidden" asp-for="@item.EventNo" name="eventNo">
-                                <button type="submit" style="color: indianred; background: none; border: none; padding: 0; text-decoration: underline; cursor: pointer;">Delete</button>
-                            </form>
-            </td>
-        </tr>
-        }
-        </tbody>
-    </table>
-    }
-    else
-    {
-    <p>No stands found.</p>
-    }
+    </div>
 </div>

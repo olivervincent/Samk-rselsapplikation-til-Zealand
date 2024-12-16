@@ -1,13 +1,45 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home Page";
 }
 
-<div class="jumbotron text-center mt-4">
-    <h1 class="display-4">Welcome to Our Event Booking System</h1>
-    <p class="lead">Manage Events, stands, bookings, and guests all in one place.</p>
-    <hr class="my-4">
-    <p>Get started by exploring our services.</p>
-    <a class="btn btn-primary btn-lg" href="/Events/GetEvents" role="button">View Events</a>
+<div class="text-center mt-5">
+    <h1 class="display-4 fw-bold">Welcome to EventsPlanner</h1>
+    <p class="lead text-muted">Plan and organize events with ease!</p>
+    <a href="/Bookings/GetBookings" class="btn btn-primary btn-lg mt-3">View Bookings</a>
 </div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Manage Guests</h5>
+                    <p class="card-text">Add and view guests for events.</p>
+                    <a href="/Guests/GetGuests" class="btn btn-outline-primary">Manage Guests</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Manage Stands</h5>
+                    <p class="card-text">View and update stands for events.</p>
+                    <a href="/Stands/GetStands" class="btn btn-outline-primary">Manage Stands</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Manage Events</h5>
+                    <p class="card-text">View and update events.</p>
+                    <a href="/Events/GetEvents" class="btn btn-outline-primary">Manage Events</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

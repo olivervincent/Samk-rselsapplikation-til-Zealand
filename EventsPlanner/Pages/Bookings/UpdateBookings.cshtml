@@ -1,35 +1,47 @@
 ﻿@page
 @model EventsPlanner.Pages.Bookings.UpdateBookingsModel
 @{
-    ViewData["Title"] = "Update Bookings";
+    ViewData["Title"] = "Update Booking";
 }
 
-<div class="container mt-4">
-    <h2 class="text-center text-primary mb-4">Update Booking</h2>
-    <form method="post">
-        <input type="hidden" asp-for="Booking.BookingId" />
-        <div class="form-row">
-            <div class="col-md-3">
-                <label asp-for="Booking.DateFrom">From</label>
-                <input type="date" class="form-control" asp-for="Booking.DateFrom" />
-            </div>
-            <div class="col-md-3">
-                <label asp-for="Booking.DateTo">To</label>
-                <input type="date" class="form-control" asp-for="Booking.DateTo" />
-            </div>
-            <div class="col-md-3">
-                <label asp-for="Booking.EventNo">Event No</label>
-                <input type="text" class="form-control" asp-for="Booking.EventNo" />
-            </div>
-            <div class="col-md-3">
-                <label asp-for="Booking.StandNo">Stand No</label>
-                <input type="text" class="form-control" asp-for="Booking.StandNo" />
-            </div>
-            <div class="col-md-3">
-                <label asp-for="Booking.GuestNo">Guest No</label>
-                <input type="text" class="form-control" asp-for="Booking.GuestNo" />
-            </div>
+<div class="text-center mt-5">
+    <h1 class="display-5 fw-bold">Update Booking</h1>
+    <p class="text-muted">Modify the details of an existing booking below.</p>
+</div>
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form method="post" class="row g-3">
+                <div class="col-md-6">
+                    <label for="bookingId" class="form-label">Booking ID</label>
+                    <input type="text" id="bookingId" class="form-control" asp-for="Booking.BookingId" readonly />
+                </div>
+                <div class="col-md-6">
+                    <label for="eventNo" class="form-label">Event No</label>
+                    <input type="text" id="eventNo" class="form-control" asp-for="Booking.EventNo" readonly />
+                </div>
+                <div class="col-md-6">
+                    <label for="standNo" class="form-label">Stand No</label>
+                    <input type="text" id="standNo" class="form-control" asp-for="Booking.StandNo" readonly />
+                </div>
+                <div class="col-md-6">
+                    <label for="guestNo" class="form-label">Guest No</label>
+                    <input type="text" id="guestNo" class="form-control" asp-for="Booking.GuestNo" readonly />
+                </div>
+                <div class="col-md-6">
+                    <label for="dateFrom" class="form-label">Date From</label>
+                    <input type="date" id="dateFrom" class="form-control" asp-for="Booking.DateFrom" />
+                </div>
+                <div class="col-md-6">
+                    <label for="dateTo" class="form-label">Date To</label>
+                    <input type="date" id="dateTo" class="form-control" asp-for="Booking.DateTo" />
+                </div>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary btn-lg">Update Booking</button>
+                    <a asp-page="/Bookings/GetBookings" class="btn btn-secondary btn-lg">Cancel</a>
+                </div>
+            </form>
         </div>
-        <button type="submit" class="btn btn-primary mt-4">Update</button>
-        <a asp-page="/Bookings/GetBookings" class="btn btn-secondary mt-4">Back to List</a>
-    </form>
+    </div>
+</div>
