@@ -6,10 +6,25 @@
 
 <div class="text-center mt-5">
     <h1 class="display-5 fw-bold">Events</h1>
-    <p class="text-muted">Explore all upcoming events and their details.</p>
+    <p class="text-muted">Filter and explore upcoming events by city.</p>
 </div>
 
 <div class="container mt-5">
+    <!-- Filter Form -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-10">
+                    <label for="FilterCriteria" class="form-label">Filter by City</label>
+                    <input type="text" id="FilterCriteria" name="FilterCriteria" class="form-control" value="@Model.FilterCriteria" placeholder="Enter city name" />
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Events Table -->
     <div class="card shadow-sm">
         <div class="card-body">
             <table class="table table-bordered table-hover align-middle">
@@ -22,18 +37,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Events)
+                    @if (Model.Events.Any())
+                    {
+                        @foreach (var item in Model.Events)
+                        {
+                            <tr>
+                                <td>@item.EventNo</td>
+                                <td>@item.Name</td>
+                                <td>@item.Address</td>
+                                <td>
+                                    <a asp-page="/Stands/GetStands" asp-page-handler="EventStands" asp-route-id="@item.EventNo" class="btn btn-primary btn-sm">View Stands</a>
+                                </td>
+                                <td>
+                                    <a asp-page="/Bookings/CreateBooking" asp-route-id="@item.EventNo" class="btn btn-secondary btn-sm">Create Booking</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
                     {
                         <tr>
-                            <td>@item.EventNo</td>
-                            <td>@item.Name</td>
-                            <td>@item.Address</td>
-                            <td>
-                                <a asp-page="/Stands/GetStands" asp-page-handler="EventStands" asp-route-id="@item.EventNo" class="btn btn-primary btn-sm">View Stands</a>
-                            </td>
-                            <td>
-                                <a asp-page="/Bookings/CreateBooking" asp-route-id="@item.EventNo" class="btn btn-secondary btn-sm">Create Booking</a>
-                            </td>
+                            <td colspan="5" class="text-center text-muted">No events match the filter criteria.</td>
                         </tr>
                     }
                 </tbody>

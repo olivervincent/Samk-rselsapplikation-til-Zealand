@@ -6,10 +6,29 @@
 
 <div class="text-center mt-5">
     <h1 class="display-5 fw-bold">Bookings</h1>
-    <p class="text-muted">Review all current bookings and their details.</p>
+    <p class="text-muted">Filter bookings by date and review all details.</p>
 </div>
 
 <div class="container mt-5">
+    <!-- Filter Form -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-5">
+                    <label for="DateFrom" class="form-label">Date From</label>
+                    <input type="date" id="DateFrom" name="DateFrom" class="form-control" value="@Model.DateFrom?.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="col-md-5">
+                    <label for="DateTo" class="form-label">Date To</label>
+                    <input type="date" id="DateTo" name="DateTo" class="form-control" value="@Model.DateTo?.ToString("yyyy-MM-dd")" />
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Bookings Table -->
     <div class="card shadow-sm">
         <div class="card-body">
             <table class="table table-bordered table-hover align-middle">

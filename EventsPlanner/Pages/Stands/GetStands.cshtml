@@ -6,10 +6,32 @@
 
 <div class="text-center mt-5">
     <h1 class="display-5 fw-bold">Stands</h1>
-    <p class="text-muted">Manage and view all stands for your events.</p>
+    <p class="text-muted">Filter and manage all stands for your events.</p>
+    <p><a asp-page="/Stands/CreateStands" class="btn btn-primary btn-sm">Create Stand</a></p>
 </div>
 
 <div class="container mt-5">
+    <!-- Filter Form -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-6">
+                    <label for="Price" class="form-label">Price</label>
+                    <input type="number" id="Price" name="Stand.Price" class="form-control" value="@Model.Stand?.Price" placeholder="Enter price" />
+                </div>
+                <div class="col-md-6">
+                    <label for="Types" class="form-label">Type</label>
+                    <input type="text" id="Types" name="Stand.Types" class="form-control" value="@Model.Stand?.Types" placeholder="Enter type" />
+                </div>
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                    <a href="/Stands" class="btn btn-secondary ms-2">Clear</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    [13:15]
+    <!-- Stands Table -->
     <div class="card shadow-sm">
         <div class="card-body">
             <table class="table table-bordered table-hover align-middle">
@@ -33,8 +55,8 @@
                             <td>
                                 <a asp-page="/Bookings/GetBookings" asp-page-handler="BookingsPerEventPerStand" asp-route-id1="@item.EventNo" asp-route-id2="@item.StandNo" class="btn btn-primary btn-sm">View Bookings</a>
                                 <form method="post" class="d-inline">
-                                    <input type="hidden" asp-for="@item.StandNo" name="standNo">
-                                    <input type="hidden" asp-for="@item.EventNo" name="eventNo">
+                                    <input type="hidden" asp-for="@item.StandNo" name="standNo" />
+                                    <input type="hidden" asp-for="@item.EventNo" name="eventNo" />
                                     <button type="submit" class="btn btn-link text-danger p-0" style="text-decoration: underline;">Delete</button>
                                 </form>
                             </td>
