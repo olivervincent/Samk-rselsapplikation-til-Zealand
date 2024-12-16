@@ -10,24 +10,25 @@
 </div>
 
 <div class="container mt-5">
-    <!-- Filter Form -->
-    <div class="card shadow-sm mb-4">
-        <div class="card-body">
-            <form method="get" class="row g-3">
-                <div class="col-md-5">
-                    <label for="DateFrom" class="form-label">Date From</label>
-                    <input type="date" id="DateFrom" name="DateFrom" class="form-control" value="@Model.DateFrom?.ToString("yyyy-MM-dd")" />
-                </div>
-                <div class="col-md-5">
-                    <label for="DateTo" class="form-label">Date To</label>
-                    <input type="date" id="DateTo" name="DateTo" class="form-control" value="@Model.DateTo?.ToString("yyyy-MM-dd")" />
-                </div>
-                <div class="col-md-2 d-flex align-items-end">
-                    <button type="submit" class="btn btn-primary w-100">Filter</button>
-                </div>
-            </form>
+    <div class="container mt-4">
+        <!-- Filter Form -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <form method="get" class="row g-3">
+                    <div class="col-md-5">
+                        <label for="DateFrom" class="form-label">Date From</label>
+                        <input type="date" id="DateFrom" name="DateFrom" class="form-control" value="@Model.DateFrom?.ToString("yyyy-MM-dd")" />
+                    </div>
+                    <div class="col-md-5">
+                        <label for="DateTo" class="form-label">Date To</label>
+                        <input type="date" id="DateTo" name="DateTo" class="form-control" value="@Model.DateTo?.ToString("yyyy-MM-dd")" />
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">Filter</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
     <!-- Bookings Table -->
     <div class="card shadow-sm">
         <div class="card-body">
