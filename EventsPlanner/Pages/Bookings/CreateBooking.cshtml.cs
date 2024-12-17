@@ -12,9 +12,9 @@ namespace EventsPlanner;
 public class CreateBookingModel : PageModel
 {
     [BindProperty(SupportsGet = true)]
-    public DateTime? DateFrom{ get; set; }
+    public DateTime? DateFrom { get; set; }
     [BindProperty(SupportsGet = true)]
-    public DateTime? DateTo{ get; set; }
+    public DateTime? DateTo { get; set; }
     [BindProperty]
     public Booking Booking { get; set; }
     [BindProperty]
@@ -23,11 +23,13 @@ public class CreateBookingModel : PageModel
     public List<Guest> Guests { get; set; }
     [BindProperty]
     public List<Stand> Stands { get; set; }
-    [BindProperty]
-    public int StandsNo { get; set; }
-    [BindProperty]
-    public int GuestsNo { get; set; }
-    
+    [BindProperty(SupportsGet = true)]
+    public int StandNo { get; set; }
+    [BindProperty(SupportsGet = true)]
+    public int GuestNo { get; set; }
+    [BindProperty(SupportsGet = true)]
+    public int EventNo { get; set; }
+
     IBookingService bService;
     IEventService eService;
     IStandService sService;
@@ -44,33 +46,25 @@ public class CreateBookingModel : PageModel
     }
     public IActionResult OnGet(int id)
     {
+        EventNo = id;
         Guests = gService.GetGuests().ToList();
         Stands = sService.GetStands().Where(x => x.EventNo == id).ToList();
         Events = eService.GetEvents().ToList();
         return Page();
     }
 
-    public void OnPost()
+    public IActionResult OnPost()
     {
-        // Log the values of StandsNo and GuestsNo
-        Console.WriteLine($"StandsNo: {StandsNo}, GuestsNo: {GuestsNo}");
 
-        // Ensure the values exist in the respective tables
-        if (!sService.GetStands().Any(s => s.StandNo == StandsNo))
+        if (!ModelState.IsValid)
         {
-            Console.WriteLine("Stand does not exist");
+            return Page();
         }
-
-        if (!gService.GetGuests().Any(g => g.GuestNo == GuestsNo))
-        {
-            Console.WriteLine("Guest does not exist");
-        }
-
-        Booking.StandNo = StandsNo;
-        Booking.GuestNo = GuestsNo;
-        Booking.Stand = sService.GetStands().FirstOrDefault(s => s.StandNo == StandsNo);
-        Booking.GuestNoNavigation = gService.GetGuests().FirstOrDefault(g => g.GuestNo == GuestsNo);
+        Booking.StandNo = StandNo;
+        Booking.GuestNo = GuestNo;
+        
+       
         bService.CreateBooking(Booking);
-        RedirectToPage("/Bookings/GetBookings");
+       return  RedirectToPage("/Bookings/GetBookings");
     }
 }

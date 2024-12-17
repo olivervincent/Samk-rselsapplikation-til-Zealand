@@ -15,5 +15,6 @@ namespace EventsPlanner.Services.Interface
         public void CreateBooking(Booking booking);
         public void DeleteBooking(int bid);
         public void UpdateBooking(Booking booking);
+        public Booking GetBookingById(int id);
     }
 }

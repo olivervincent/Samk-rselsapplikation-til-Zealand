@@ -12,7 +12,7 @@ namespace EventsPlanner.Pages.Bookings
         [BindProperty]
         public Booking Booking { get; set; }
         [BindProperty]
-        public List<Stand> Stands { get; set; }
+        public IEnumerable<Stand> Stands { get; set; }
         [BindProperty]
         public List<Guest> Guests { get; set; }
         [BindProperty(SupportsGet = true)]
@@ -33,7 +33,8 @@ namespace EventsPlanner.Pages.Bookings
         public void OnGet(int id)
         {
             Booking = _service.GetBookings().FirstOrDefault(b => b.BookingId == id);
-            Stands = _sService.GetStands().ToList();
+            int x = Booking.EventNo;
+            Stands = _sService.GetStandsPerEvent(x);
             Guests = _guestService.GetGuests().ToList();
             if (Booking == null)
             {
@@ -48,6 +49,7 @@ namespace EventsPlanner.Pages.Bookings
                 return Page();
             }
             Booking.StandNo = StandNo;
+            Booking.GuestNo = GuestNo;
             _service.UpdateBooking(Booking);
 
             return RedirectToPage("/Bookings/GetBookings");

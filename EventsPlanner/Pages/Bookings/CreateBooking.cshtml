@@ -16,15 +16,25 @@
             <form method="post" class="row g-3">
                 <div class="col-md-6">
                     <label for="eventNo" class="form-label">Event No</label>
-                    <input type="text" id="eventNo" class="form-control" asp-for="Booking.EventNo" required />
+                    <input type ="text" id="eventNo" class="form-control" asp-for="Booking.EventNo" value="@Model.EventNo" readonly />
                 </div>
                 <div class="col-md-6">
                     <label for="standNo" class="form-label">Stand No</label>
-                    <input type="text" id="standNo" class="form-control" asp-for="Booking.StandNo" required />
+                    <select name="StandNo" id="StandNo" asp-for="StandNo" class="form-select">
+                        @foreach (var item in Model.Stands)
+                        {
+                            <option value="@item.StandNo">@item.StandNo</option>
+                        }
+                    </select>
                 </div>
                 <div class="col-md-6">
                     <label for="guestNo" class="form-label">Guest No</label>
-                    <input type="text" id="guestNo" class="form-control" asp-for="Booking.GuestNo" required />
+                    <select name="GuestNo" id="GuestNo" asp-for="GuestNo" class="form-select">
+                        @foreach (var item in Model.Guests)
+                        {
+                            <option value="@item.GuestNo">@item.GuestNo</option>
+                        }
+                    </select>
                 </div>
                 <div class="col-md-6">
                     <label for="dateFrom" class="form-label">Date From</label>
