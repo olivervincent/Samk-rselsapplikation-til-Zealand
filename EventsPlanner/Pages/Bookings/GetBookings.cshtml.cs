@@ -51,14 +51,6 @@ namespace EventsPlanner
         {
             bService.DeleteBooking(bookingId);
 
-            if (DateFrom.HasValue && DateTo.HasValue)
-            {
-                Bookings = bService.FilterBookingsByDate(DateFrom.Value, DateTo.Value);
-            }
-            else
-            {
-                Bookings = bService.GetBookings();
-            }
 
             return RedirectToPage();
         }

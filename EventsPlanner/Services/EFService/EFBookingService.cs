@@ -31,6 +31,10 @@ namespace EventsPlanner.Services.EFService
         {
             return context.Bookings.Where(b=>b.EventNo==hid && b.StandNo==rid);          
         }
+        public Booking GetBookingById(int id)
+        {
+            return context.Bookings.Find(id);
+        }
         public void CreateBooking(Booking booking)
         {
             using (var context = new EventdbContext.EventdbContext())

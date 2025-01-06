@@ -1,48 +1,65 @@
 ﻿@page
 @model EventsPlanner.GetGuestsModel
 @{
-ViewData["Title"] = "GetGuests";
+    ViewData["Title"] = "Guests";
 }
-<div class="container mt-4">
-    <h2 class="text-center text-primary mb-4">List of Guests</h2>
-    <form class="form-inline mb-4">
-        <div class="form-group mr-2">
-            <label for="FilterCriteria" class="sr-only">Search</label>
-            <input type="text" class="form-control" id="FilterCriteria" placeholder="Search" asp-for="FilterCriteria" />
-        </div>
-        <button type="submit" class="btn btn-primary mr-2">Filter</button>
-        <a asp-page="/Guests/GetGuests" class="btn btn-secondary">Back to Full List</a>
-    </form>
-    <a asp-page="/Guests/CreateGuests" class="btn btn-primary">Create</a>
 
-    @if (Model.Guests != null)
-    {
-    <table class="table table-sm table-hover">
-        <thead class="thead-dark">
-        <tr>
-            <th>Guest No</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Bookings</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var item in Model.Guests)
-        {
-        <tr>
-            <td>@item.GuestNo</td>
-            <td>@item.Name</td>
-            <td>@item.Address</td>
-            <td>
-                <a asp-page="/Bookings/GetBookings" asp-page-handler="GuestBookings" asp-route-id="@item.GuestNo" class="btn btn-info btn-sm">My Bookings</a>
-            </td>
-        </tr>
-        }
-        </tbody>
-    </table>
-    }
-    else
-    {
-    <p>No guests found.</p>
-    }
+<div class="text-center mt-5">
+    <h1 class="display-5 fw-bold">Guests</h1>
+    <p class="text-muted">Filter and manage guest information.</p>
+    <p><a asp-page="/Guests/CreateGuests" class="btn btn-primary btn-sm">Create Guest</a></p>
+</div>
+
+<div class="container mt-5">
+    <!-- Filter Form -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-10">
+                    <label for="FilterCriteria" class="form-label">Filter by Address</label>
+                    <input type="text" id="FilterCriteria" name="FilterCriteria" class="form-control" value="@Model.FilterCriteria" placeholder="Enter address keyword" />
+                </div>
+                <div class="col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">Filter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Guests Table -->
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Guest No</th>
+                        <th>Name</th>
+                        <th>Address</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Guests.Any())
+                    {
+                        @foreach (var item in Model.Guests)
+                        {
+                            <tr>
+                                <td>@item.GuestNo</td>
+                                <td>@item.Name</td>
+                                <td>@item.Address</td>
+                                <td>
+                                    <a asp-page="/Bookings/GetBookings" asp-page-handler="GuestBookings" asp-route-id="@item.GuestNo" class="btn btn-primary btn-sm">@item.Name's Bookings</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">No guests match the filter criteria.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
