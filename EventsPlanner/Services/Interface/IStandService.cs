@@ -15,6 +15,6 @@ namespace EventsPlanner.Services.Interface
 
         public void CreateStand(Stand stand);
         public void UpdateStand(Stand stand);
-        public void DeleteStand(int id, int id2);
+        public void DeleteStand(int standNo, int eventNo);
     }
 }
