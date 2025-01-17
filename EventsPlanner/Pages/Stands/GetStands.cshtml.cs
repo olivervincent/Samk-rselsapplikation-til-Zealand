@@ -28,7 +28,7 @@ namespace EventsPlanner
         {
             if (Stand.Price > 0 || !String.IsNullOrEmpty(Stand.Types))
             {
-                if (!ModelState.IsValid) 
+                if (ModelState.IsValid) 
                 {
                     Stands = rService.GetStands(Stand.Price, Stand.Types);
                 }
