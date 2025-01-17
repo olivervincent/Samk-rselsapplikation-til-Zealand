@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using EventsPlanner.EventdbContext;
@@ -13,7 +14,7 @@ namespace EventsPlanner
     public class GetStandsModel : PageModel
     {
         [BindProperty(SupportsGet = true)]
-       public Stand Stand { get; set; }
+        public Stand Stand { get; set; }
         public IEnumerable<Stand> Stands { get; set; }
         public int Count { get { return Stands.Count(); } }
 
@@ -27,7 +28,10 @@ namespace EventsPlanner
         {
             if (Stand.Price > 0 || !String.IsNullOrEmpty(Stand.Types))
             {
-                Stands = rService.GetStands(Stand.Price, Stand.Types);
+                if (!ModelState.IsValid) 
+                {
+                    Stands = rService.GetStands(Stand.Price, Stand.Types);
+                }
             }
             else
                 Stands = rService.GetStands();

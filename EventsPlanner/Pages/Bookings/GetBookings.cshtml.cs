@@ -12,6 +12,7 @@ namespace EventsPlanner
 {
     public class GetBookingsModel : PageModel
     {
+        public string GetErrorMsg() => $"Date to must be higer than date from";
         [BindProperty(SupportsGet = true)]
         public DateTime? DateFrom{ get; set; }
         [BindProperty(SupportsGet = true)]
@@ -33,7 +34,15 @@ namespace EventsPlanner
         {      
             if (DateFrom.HasValue && DateTo.HasValue)
             {
-                Bookings = bService.FilterBookingsByDate(DateFrom.Value, DateTo.Value);
+                if (DateFrom>DateTo) 
+
+                { ModelState.AddModelError(String.Empty,GetErrorMsg()); }
+
+                 
+                if (ModelState.IsValid)
+                
+                {Bookings = bService.FilterBookingsByDate(DateFrom.Value, DateTo.Value); }
+                else Bookings = bService.GetBookings();
             }
             else
                 Bookings = bService.GetBookings();           

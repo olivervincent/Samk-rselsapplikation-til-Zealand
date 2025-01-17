@@ -11,6 +11,7 @@ namespace EventsPlanner;
 
 public class CreateBookingModel : PageModel
 {
+    public string GetErrorMsg() => $"Date to must be higer than date from";
     [BindProperty(SupportsGet = true)]
     public DateTime? DateFrom { get; set; }
     [BindProperty(SupportsGet = true)]
@@ -56,15 +57,21 @@ public class CreateBookingModel : PageModel
     public IActionResult OnPost()
     {
 
-        if (!ModelState.IsValid)
+        if (DateFrom.HasValue && DateTo.HasValue && DateFrom > DateTo)
         {
+            ModelState.AddModelError(String.Empty, GetErrorMsg());
             return Page();
         }
+        else
         Booking.StandNo = StandNo;
         Booking.GuestNo = GuestNo;
         
-       
         bService.CreateBooking(Booking);
        return  RedirectToPage("/Bookings/GetBookings");
+
+       
+
+
+
     }
 }

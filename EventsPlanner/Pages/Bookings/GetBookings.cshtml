@@ -15,6 +15,17 @@
         <div class="card shadow-sm mb-4">
             <div class="card-body">
                 <form method="get" class="row g-3">
+                    <div class="col-12">
+                        @if (!ViewData.ModelState.IsValid)
+                        {
+                            <div class="alert alert-danger">
+                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                {
+                                    <p>@error.ErrorMessage</p>
+                                }
+                            </div>
+                        }
+                    </div>
                     <div class="col-md-5">
                         <label for="DateFrom" class="form-label">Date From</label>
                         <input type="date" id="DateFrom" name="DateFrom" class="form-control" value="@Model.DateFrom?.ToString("yyyy-MM-dd")" />

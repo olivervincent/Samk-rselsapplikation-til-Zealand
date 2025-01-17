@@ -19,9 +19,9 @@ namespace EventsPlanner.Services.EFService
         {
             return context.Bookings;
         }
-        public IEnumerable<Booking> FilterBookingsByDate(DateTime dateFrom, DateTime dateTo )
+        public IEnumerable<Booking> FilterBookingsByDate(DateTime dateFrom, DateTime dateTo)
         {
-            return context.Bookings.Where(b => b.DateFrom <= dateFrom && b.DateTo >= dateTo);
+            return context.Bookings.Where(b => b.DateFrom < dateTo && b.DateTo > dateFrom);
         }
         public IEnumerable<Booking> GetBookingsPerGuest(int id)
         {
@@ -39,14 +39,14 @@ namespace EventsPlanner.Services.EFService
         {
             using (var context = new EventdbContext.EventdbContext())
             {
-                // Check if the GuestNo exists in the Guest table
+                
                 var guestExists = context.Guests.Any(g => g.GuestNo == booking.GuestNo);
                 if (!guestExists)
                 {
                     throw new ArgumentException($"The specified GuestNo does not exist. {booking.GuestNo}");
                 }
-
-                // Insert the booking into the database
+                
+               
                 context.Bookings.Add(booking);
                 context.SaveChanges();
             }

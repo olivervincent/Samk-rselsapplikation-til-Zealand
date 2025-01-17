@@ -18,7 +18,9 @@
                 <div class="col-md-6">
                     <label for="Price" class="form-label">Price</label>
                     <input type="number" id="Price" name="Stand.Price" class="form-control" value="@Model.Stand?.Price" placeholder="Enter price" />
+                    <span asp-validation-for="Stand.Price" class="text-danger"></span>
                 </div>
+
                 <div class="col-md-6">
                     <label for="Types" class="form-label">Type</label>
                     <input type="text" id="Types" name="Stand.Types" class="form-control" value="@Model.Stand?.Types" placeholder="Enter type" />
